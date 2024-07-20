@@ -14,9 +14,9 @@ const winning_combos = [
   [2, 4, 6],
 ];
 
-const gameOverSound = new Audio("../assets/gameover.wav");
-const turnSound = new Audio("../assets/turnsound.mp3");
-const winSound = new Audio("../assets/gamewin.mp3");
+const gameOverSound = new Audio("./assets/gameover.wav");
+const turnSound = new Audio("./assets/turnsound.mp3");
+const winSound = new Audio("./assets/gamewin.mp3");
 
 /*--------- Cached Element References -------*/
 
