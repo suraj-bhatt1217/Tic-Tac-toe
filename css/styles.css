@@ -32,7 +32,7 @@ html {
 body {
   background-color: var(--bg-color);
   /* Use a system font, if none are available use an available sans-sarif */
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Color Emoji", "Apple Color Emoji", sans-serif;
   color: var(--text-color);
   margin: 0;
   display: flex;
@@ -66,6 +66,12 @@ h1 {
   transition: background-color 0.3s ease, border-color 0.3s ease;
   background-color: transparent;
   box-sizing: border-box;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", "EmojiOne Mozilla", "Twemoji Mozilla", "Segoe UI Symbol", system-ui, sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1;
 }
 
 .sqr.x-mark {
@@ -114,6 +120,11 @@ button:active {
   background-color: var(--button-bg);
   color: var(--button-text);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", "EmojiOne Mozilla", "Twemoji Mozilla", "Segoe UI Symbol", system-ui, sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.light-theme .theme-toggle {
@@ -139,6 +150,11 @@ body.light-theme .theme-toggle {
   border: none;
   cursor: pointer;
   transition: transform 0.1s ease;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", "EmojiOne Mozilla", "Twemoji Mozilla", "Segoe UI Symbol", system-ui, sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
 .emoji-picker-btn:hover {
@@ -282,9 +298,13 @@ body.light-theme .theme-toggle {
   border-radius: 8px;
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: system-ui, sans-serif;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", "EmojiOne Mozilla", "Twemoji Mozilla", "Segoe UI Symbol", system-ui, sans-serif;
   transition: border-color 0.3s ease;
   box-sizing: border-box;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
 .emoji-input:focus {
@@ -313,6 +333,12 @@ body.light-theme .theme-toggle {
   box-sizing: border-box;
   min-width: 50px;
   text-align: center;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", "EmojiOne Mozilla", "Twemoji Mozilla", "Segoe UI Symbol", system-ui, sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1;
 }
 
 .emoji-suggestion:hover {
