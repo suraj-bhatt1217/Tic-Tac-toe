@@ -41,17 +41,17 @@ function render() {
 
 function updateBoard() {
   board.forEach((cell, idx) => {
+    const square = squareEls[idx];
+    square.classList.remove("x-mark", "o-mark");
+    
     if (cell === "X") {
-      squareEls[idx].textContent = "🦉";
-      squareEls[idx].classList.add("animate__animated", "animate__flipInX");
-      squareEls[idx].style.backgroundColor = "#468189";
+      square.textContent = "🦉";
+      square.classList.add("animate__animated", "animate__flipInX", "x-mark");
     } else if (cell === "O") {
-      squareEls[idx].textContent = "🦄";
-      squareEls[idx].classList.add("animate__animated", "animate__flipInY");
-      squareEls[idx].style.backgroundColor = "#f4e9cd";
+      square.textContent = "🦄";
+      square.classList.add("animate__animated", "animate__flipInY", "o-mark");
     } else {
-      squareEls[idx].textContent = "";
-      squareEls[idx].style.backgroundColor = "";
+      square.textContent = "";
     }
   });
 }
@@ -110,3 +110,24 @@ squareEls.forEach((select) => {
 });
 
 document.getElementById("reset").addEventListener("click", reset);
+
+/*----------- Theme Toggle ---------------*/
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
+
+// Load saved theme preference
+const savedTheme = localStorage.getItem("theme") || "dark";
+if (savedTheme === "light") {
+  body.classList.add("light-theme");
+  themeToggle.textContent = "☀️";
+} else {
+  themeToggle.textContent = "🌙";
+}
+
+// Theme toggle functionality
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("light-theme");
+  const isLight = body.classList.contains("light-theme");
+  themeToggle.textContent = isLight ? "☀️" : "🌙";
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+});
