@@ -82,6 +82,178 @@ h1 {
   background-color: var(--o-bg);
 }
 
+/* Winning Square Glow Effect */
+.sqr.winning-square {
+  animation: glow-pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.4);
+  z-index: 10;
+  position: relative;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 60px rgba(255, 255, 255, 0.8), 0 0 90px rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Shake Animation for Invalid Moves */
+.sqr.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-8px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(8px);
+  }
+}
+
+/* Board Skins */
+/* Default Skin (already styled) */
+.board-skin-default .sqr {
+  border: 4px solid var(--square-border);
+  border-radius: 8px;
+}
+
+/* Neon Skin */
+.board-skin-neon .sqr {
+  border: 3px solid #00ffff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(0, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+  transition: all 0.3s ease;
+}
+
+.board-skin-neon .sqr:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8), inset 0 0 20px rgba(0, 255, 255, 0.3);
+  border-color: #00ffff;
+}
+
+.board-skin-neon .sqr.x-mark {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), inset 0 0 15px rgba(0, 255, 255, 0.3);
+  border-color: #00ffff;
+}
+
+.board-skin-neon .sqr.o-mark {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.3), rgba(255, 255, 0, 0.3));
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.7), inset 0 0 15px rgba(255, 0, 255, 0.3);
+  border-color: #ff00ff;
+}
+
+.board-skin-neon .sqr.winning-square {
+  animation: neon-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes neon-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 255, 255, 0.8), 0 0 60px rgba(0, 255, 255, 0.6), inset 0 0 20px rgba(0, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 1), 0 0 60px rgba(0, 255, 255, 1), 0 0 90px rgba(0, 255, 255, 0.8), inset 0 0 30px rgba(0, 255, 255, 0.6);
+  }
+}
+
+/* Retro Skin */
+.board-skin-retro .sqr {
+  border: 5px solid #8b4513;
+  border-radius: 0;
+  background: linear-gradient(135deg, #d4a574, #c19a6b);
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    4px 4px 8px rgba(0, 0, 0, 0.4);
+  font-family: "Courier New", monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.board-skin-retro .sqr.x-mark {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.board-skin-retro .sqr.o-mark {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.board-skin-retro .sqr.winning-square {
+  animation: retro-glow 1.5s ease-in-out infinite;
+  border-color: #ffd700;
+}
+
+@keyframes retro-glow {
+  0%, 100% {
+    box-shadow: 
+      inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+      inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+      4px 4px 8px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(255, 215, 0, 0.8);
+  }
+  50% {
+    box-shadow: 
+      inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+      inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+      4px 4px 8px rgba(0, 0, 0, 0.4),
+      0 0 30px rgba(255, 215, 0, 1);
+  }
+}
+
+/* Minimalist Skin */
+.board-skin-minimalist .sqr {
+  border: 1px solid var(--square-border);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.board-skin-minimalist .sqr:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.board-skin-minimalist .sqr.x-mark {
+  background: transparent;
+  border: 2px solid var(--square-border);
+  color: var(--text-color);
+}
+
+.board-skin-minimalist .sqr.o-mark {
+  background: transparent;
+  border: 2px solid var(--square-border);
+  color: var(--text-color);
+}
+
+.board-skin-minimalist .sqr.winning-square {
+  animation: minimalist-glow 1.5s ease-in-out infinite;
+  border-width: 3px;
+}
+
+@keyframes minimalist-glow {
+  0%, 100% {
+    border-color: var(--square-border);
+    opacity: 1;
+  }
+  50% {
+    border-color: var(--button-bg);
+    opacity: 0.8;
+  }
+}
+
+body.light-theme .board-skin-minimalist .sqr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
 button {
   margin-top: 20px;
   border: none;
@@ -158,6 +330,35 @@ body.light-theme .theme-toggle {
 }
 
 .emoji-picker-btn:hover {
+  transform: scale(1.1);
+}
+
+.board-skin-btn {
+  position: fixed;
+  top: 20px;
+  right: 140px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", "EmojiOne Mozilla", "Twemoji Mozilla", "Segoe UI Symbol", system-ui, sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.board-skin-btn:hover {
   transform: scale(1.1);
 }
 

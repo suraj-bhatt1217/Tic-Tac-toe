@@ -5,6 +5,8 @@ const messageEl = document.querySelector("#message");
 let board, turn, winner, tie;
 let xEmoji = "🦉";
 let oEmoji = "🦄";
+let winningCombo = null;
+let boardSkin = "default";
 const winning_combos = [
   [0, 1, 2],
   [3, 4, 5],
@@ -28,11 +30,13 @@ function init() {
   //   console.log("init just got invoked.");
   squareEls.forEach((squareEl) => {
     squareEl.className = "sqr";
+    squareEl.classList.remove("winning-square", "shake");
   });
   board = ["", "", "", "", "", "", "", "", ""];
   turn = "X";
   winner = false;
   tie = false;
+  winningCombo = null;
   render();
 }
 
@@ -59,9 +63,17 @@ function updateBoard() {
 }
 function handleClick(e) {
   const sqIdx = parseInt(e.target.id);
+  const square = squareEls[sqIdx];
+  
   if (board[sqIdx] !== "" || winner) {
+    // Invalid move - shake animation
+    square.classList.add("shake");
+    setTimeout(() => {
+      square.classList.remove("shake");
+    }, 500);
     return;
   }
+  
   board[sqIdx] = turn;
   getWinner();
   getTie();
@@ -90,6 +102,11 @@ function getWinner() {
       board[combination[0]] !== ""
     ) {
       winner = true;
+      winningCombo = combination;
+      // Add glow effect to winning squares
+      combination.forEach((idx) => {
+        squareEls[idx].classList.add("winning-square");
+      });
       winSound.play();
       confetti.start(1000);
     }
@@ -214,4 +231,24 @@ oEmojiInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     emojiSaveBtn.click();
   }
+});
+
+/*----------- Board Skin Selector ---------------*/
+const boardSkinBtn = document.getElementById("board-skin-btn");
+const boardEl = document.querySelector(".board");
+
+// Load saved board skin
+const savedBoardSkin = localStorage.getItem("boardSkin") || "default";
+boardSkin = savedBoardSkin;
+boardEl.className = `board board-skin-${boardSkin}`;
+
+// Board skin options
+const boardSkins = ["default", "neon", "retro", "minimalist"];
+let currentSkinIndex = boardSkins.indexOf(boardSkin);
+
+boardSkinBtn.addEventListener("click", () => {
+  currentSkinIndex = (currentSkinIndex + 1) % boardSkins.length;
+  boardSkin = boardSkins[currentSkinIndex];
+  boardEl.className = `board board-skin-${boardSkin}`;
+  localStorage.setItem("boardSkin", boardSkin);
 });
