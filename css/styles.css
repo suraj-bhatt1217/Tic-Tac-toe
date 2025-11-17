@@ -20,6 +20,15 @@ body.light-theme {
   --o-bg: #e74c3c;
 }
 
+/* Global scrollbar styling */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--bg-color);
   /* Use a system font, if none are available use an available sans-sarif */
@@ -32,6 +41,7 @@ body {
   justify-content: center;
   height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
 .board {
@@ -40,6 +50,7 @@ body {
   width: 325px;
   justify-content: center;
   gap: 4px;
+  box-sizing: border-box;
 }
 h1 {
   margin-bottom: 0px;
@@ -48,12 +59,13 @@ h1 {
 .sqr {
   width: 30%;
   aspect-ratio: 1/1;
-  border: 3px solid var(--square-border);
+  border: 4px solid var(--square-border);
   font-size: 64px;
   text-align: center;
   border-radius: 8px;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   background-color: transparent;
+  box-sizing: border-box;
 }
 
 .sqr.x-mark {
@@ -107,4 +119,256 @@ button:active {
 body.light-theme .theme-toggle {
   background-color: var(--button-bg);
   color: var(--button-text);
+}
+
+.emoji-picker-btn {
+  position: fixed;
+  top: 20px;
+  right: 80px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.emoji-picker-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Emoji Modal Styles */
+.emoji-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+.emoji-modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-modal-content {
+  background-color: var(--bg-color);
+  border: 3px solid var(--square-border);
+  border-radius: 16px;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.3s ease;
+  box-sizing: border-box;
+  /* Firefox scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: var(--button-bg) var(--bg-color);
+}
+
+/* Custom Scrollbar Styling for Webkit browsers (Chrome, Safari, Edge) */
+.emoji-modal-content::-webkit-scrollbar {
+  width: 12px;
+}
+
+.emoji-modal-content::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+.emoji-modal-content::-webkit-scrollbar-thumb {
+  background: var(--button-bg);
+  border-radius: 10px;
+  border: 2px solid var(--bg-color);
+  transition: background 0.3s ease;
+}
+
+.emoji-modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color);
+}
+
+.emoji-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 3px solid var(--square-border);
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-color);
+  z-index: 10;
+  border-radius: 16px 16px 0 0;
+}
+
+.emoji-modal-header h3 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.emoji-close-btn {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: var(--text-color);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  padding: 0;
+  margin: 0;
+}
+
+.emoji-close-btn:hover {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+.emoji-picker-body {
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.emoji-section {
+  margin-bottom: 30px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.emoji-section label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.emoji-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.emoji-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 32px;
+  text-align: center;
+  border: 3px solid var(--square-border);
+  border-radius: 8px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: system-ui, sans-serif;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.emoji-input:focus {
+  outline: none;
+  border-color: var(--button-bg);
+}
+
+.emoji-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.emoji-suggestion {
+  font-size: 32px;
+  padding: 8px 12px;
+  border: 3px solid var(--square-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 50px;
+  text-align: center;
+}
+
+.emoji-suggestion:hover {
+  background-color: var(--button-bg);
+  transform: scale(1.15);
+  border-color: var(--button-bg);
+}
+
+.emoji-save-btn {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: system-ui, sans-serif;
+  box-sizing: border-box;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+.emoji-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0.9;
+}
+
+.emoji-save-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

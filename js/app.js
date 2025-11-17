@@ -3,6 +3,8 @@ const squareEls = document.querySelectorAll(".sqr");
 const messageEl = document.querySelector("#message");
 /*------- Variables (state)-----------*/
 let board, turn, winner, tie;
+let xEmoji = "🦉";
+let oEmoji = "🦄";
 const winning_combos = [
   [0, 1, 2],
   [3, 4, 5],
@@ -45,10 +47,10 @@ function updateBoard() {
     square.classList.remove("x-mark", "o-mark");
     
     if (cell === "X") {
-      square.textContent = "🦉";
+      square.textContent = xEmoji;
       square.classList.add("animate__animated", "animate__flipInX", "x-mark");
     } else if (cell === "O") {
-      square.textContent = "🦄";
+      square.textContent = oEmoji;
       square.classList.add("animate__animated", "animate__flipInY", "o-mark");
     } else {
       square.textContent = "";
@@ -72,11 +74,11 @@ function handleClick(e) {
 
 function getMessage() {
   if (!winner && !tie) {
-    messageEl.textContent = `It is ${turn === "X" ? "🦉" : "🦄"}'s turn`;
+    messageEl.textContent = `It is ${turn === "X" ? xEmoji : oEmoji}'s turn`;
   } else if (!winner && tie) {
     messageEl.textContent = "Cat's game.  Meow!! 😻";
   } else {
-    messageEl.textContent = `${turn === "X" ? "🦉" : "🦄"} wins the game!`;
+    messageEl.textContent = `${turn === "X" ? xEmoji : oEmoji} wins the game!`;
   }
 }
 
@@ -130,4 +132,86 @@ themeToggle.addEventListener("click", () => {
   const isLight = body.classList.contains("light-theme");
   themeToggle.textContent = isLight ? "☀️" : "🌙";
   localStorage.setItem("theme", isLight ? "light" : "dark");
+});
+
+/*----------- Emoji Picker ---------------*/
+const emojiPickerBtn = document.getElementById("emoji-picker-btn");
+const emojiModal = document.getElementById("emoji-modal");
+const emojiCloseBtn = document.getElementById("emoji-close");
+const emojiSaveBtn = document.getElementById("emoji-save");
+const xEmojiInput = document.getElementById("x-emoji");
+const oEmojiInput = document.getElementById("o-emoji");
+const emojiSuggestions = document.querySelectorAll(".emoji-suggestion");
+
+// Load saved emojis
+const savedXEmoji = localStorage.getItem("xEmoji");
+const savedOEmoji = localStorage.getItem("oEmoji");
+if (savedXEmoji) {
+  xEmoji = savedXEmoji;
+  xEmojiInput.value = savedXEmoji;
+}
+if (savedOEmoji) {
+  oEmoji = savedOEmoji;
+  oEmojiInput.value = savedOEmoji;
+}
+
+// Open emoji picker
+emojiPickerBtn.addEventListener("click", () => {
+  emojiModal.classList.add("show");
+  xEmojiInput.value = xEmoji;
+  oEmojiInput.value = oEmoji;
+});
+
+// Close emoji picker
+emojiCloseBtn.addEventListener("click", () => {
+  emojiModal.classList.remove("show");
+});
+
+// Close when clicking outside modal
+emojiModal.addEventListener("click", (e) => {
+  if (e.target === emojiModal) {
+    emojiModal.classList.remove("show");
+  }
+});
+
+// Emoji suggestion clicks
+emojiSuggestions.forEach((suggestion) => {
+  suggestion.addEventListener("click", () => {
+    const emoji = suggestion.getAttribute("data-emoji");
+    const parentSection = suggestion.closest(".emoji-section");
+    const xInput = parentSection.querySelector("#x-emoji");
+    if (xInput) {
+      xEmojiInput.value = emoji;
+    } else {
+      oEmojiInput.value = emoji;
+    }
+  });
+});
+
+// Save emojis
+emojiSaveBtn.addEventListener("click", () => {
+  const newXEmoji = xEmojiInput.value.trim() || "🦉";
+  const newOEmoji = oEmojiInput.value.trim() || "🦄";
+  
+  xEmoji = newXEmoji;
+  oEmoji = newOEmoji;
+  
+  localStorage.setItem("xEmoji", xEmoji);
+  localStorage.setItem("oEmoji", oEmoji);
+  
+  emojiModal.classList.remove("show");
+  render(); // Update the board with new emojis
+});
+
+// Allow Enter key to save
+xEmojiInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    emojiSaveBtn.click();
+  }
+});
+
+oEmojiInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    emojiSaveBtn.click();
+  }
 });

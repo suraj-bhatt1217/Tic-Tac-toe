@@ -16,6 +16,7 @@
   </head>
   <body>
     <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌙</button>
+    <button id="emoji-picker-btn" class="emoji-picker-btn" title="Customize emojis">😀</button>
     <h1>Tic-Tac-Toe</h1>
     <h2 id="message"></h2>
 
@@ -31,5 +32,50 @@
       <div class="sqr" id="8"></div>
     </section>
     <button id="reset">Reset</button>
+
+    <!-- Emoji Picker Modal -->
+    <div id="emoji-modal" class="emoji-modal">
+      <div class="emoji-modal-content">
+        <div class="emoji-modal-header">
+          <h3>Choose Your Emojis</h3>
+          <button class="emoji-close-btn" id="emoji-close">&times;</button>
+        </div>
+        <div class="emoji-picker-body">
+          <div class="emoji-section">
+            <label for="x-emoji">Player X (🦉) Emoji:</label>
+            <div class="emoji-input-group">
+              <input type="text" id="x-emoji" class="emoji-input" maxlength="2" placeholder="🦉">
+              <div class="emoji-suggestions">
+                <span class="emoji-suggestion" data-emoji="🦉">🦉</span>
+                <span class="emoji-suggestion" data-emoji="❌">❌</span>
+                <span class="emoji-suggestion" data-emoji="⚡">⚡</span>
+                <span class="emoji-suggestion" data-emoji="🔥">🔥</span>
+                <span class="emoji-suggestion" data-emoji="⭐">⭐</span>
+                <span class="emoji-suggestion" data-emoji="🎯">🎯</span>
+                <span class="emoji-suggestion" data-emoji="🚀">🚀</span>
+                <span class="emoji-suggestion" data-emoji="💎">💎</span>
+              </div>
+            </div>
+          </div>
+          <div class="emoji-section">
+            <label for="o-emoji">Player O (🦄) Emoji:</label>
+            <div class="emoji-input-group">
+              <input type="text" id="o-emoji" class="emoji-input" maxlength="2" placeholder="🦄">
+              <div class="emoji-suggestions">
+                <span class="emoji-suggestion" data-emoji="🦄">🦄</span>
+                <span class="emoji-suggestion" data-emoji="⭕">⭕</span>
+                <span class="emoji-suggestion" data-emoji="💫">💫</span>
+                <span class="emoji-suggestion" data-emoji="✨">✨</span>
+                <span class="emoji-suggestion" data-emoji="🌙">🌙</span>
+                <span class="emoji-suggestion" data-emoji="🌸">🌸</span>
+                <span class="emoji-suggestion" data-emoji="🦋">🦋</span>
+                <span class="emoji-suggestion" data-emoji="🌺">🌺</span>
+              </div>
+            </div>
+          </div>
+          <button id="emoji-save" class="emoji-save-btn">Save</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
